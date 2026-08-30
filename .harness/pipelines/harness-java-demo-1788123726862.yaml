@@ -60,7 +60,7 @@ pipeline:
                       spec:
                         paths:
                           - target/surefire-reports/*.xml
-                    intelligenceMode: true
+                    intelligenceMode: false
               - step:
                   type: BuildAndPushDockerRegistry
                   name: BuildAndPushDockerRegistry_1
