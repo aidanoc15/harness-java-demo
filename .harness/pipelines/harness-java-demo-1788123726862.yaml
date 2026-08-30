@@ -3,44 +3,40 @@ pipeline:
   name: Build harness-java-demo
   orgIdentifier: default
   projectIdentifier: default_project
-  properties:
-    ci:
-      codebase:
-        build: <+input>
-        connectorRef: account.Github_OAuth_1788122945839
-        repoName: aidanoc15/harness-java-demo
   stages:
     - stage:
-        identifier: build
         name: build
+        identifier: build
+        description: ""
+        type: CI
         spec:
+          cloneCodebase: true
           caching:
             enabled: true
-          cloneCodebase: true
+            override: true
+          buildIntelligence:
+            enabled: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
           execution:
             steps:
               - step:
-                  identifier: echo
-                  name: echo
-                  spec:
-                    command: echo hello world
-                  timeout: ""
                   type: Run
-              - step:
-                  identifier: dockerbuild
-                  name: docker_build
+                  name: GoInstallBuildTest
+                  identifier: GoInstallBuildTest
                   spec:
-                    caching: true
-                    connectorRef: <+input>
-                    repo: hello/world
-                    tags:
-                      - latest
-                  timeout: ""
-                  type: BuildAndPushDockerRegistry
-          platform:
-            arch: Amd64
-            os: Linux
-          runtime:
-            spec: {}
-            type: Cloud
-        type: CI
+                    shell: Bash
+                    command: |-
+                      mvn clean package
+                      docker build -t aidanoconnell/harness-java-demo:1.0 .
+                      docker push aidanoconnell/harness-java-demo:1.0
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github_OAuth_1788122945839
+        repoName: aidanoc15/harness-java-demo
+        build: <+input>
