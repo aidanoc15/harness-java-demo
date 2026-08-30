@@ -34,6 +34,21 @@ pipeline:
                     shell: Bash
                     command: mvn clean package
               - step:
+                  type: Test
+                  name: Run Unit Tests
+                  identifier: Run_Unit_Tests
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: maven:3.9-eclipse-temurin-21
+                    shell: Bash
+                    command: mvn test
+                    reports:
+                      type: JUnit
+                      spec:
+                        paths:
+                          - target/surefire-reports/*.xml
+                    intelligenceMode: true
+              - step:
                   type: BuildAndPushDockerRegistry
                   name: BuildAndPushDockerRegistry_1
                   identifier: BuildAndPushDockerRegistry_1
