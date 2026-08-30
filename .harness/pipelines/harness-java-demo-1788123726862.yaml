@@ -41,7 +41,20 @@ pipeline:
                     connectorRef: account.harnessImage
                     image: maven:3.9-eclipse-temurin-21
                     shell: Bash
-                    command: mvn test
+                    command: |-
+                      mvn test
+                      echo "===== DEBUG ====="
+                      echo "Working directory:"
+                      pwd
+
+                      echo "Target:"
+                      ls -la target || true
+
+                      echo "Surefire:"
+                      ls -la target/surefire-reports || true
+
+                      echo "XML files:"
+                      find /harness -name "*.xml" -print
                     reports:
                       type: JUnit
                       spec:
