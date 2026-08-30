@@ -62,4 +62,7 @@ pipeline:
       codebase:
         connectorRef: account.Github_OAuth_1788122945839
         repoName: aidanoc15/harness-java-demo
-        build: <+input>
+        build:
+          type: branch
+          spec:
+            branch: main
