@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_aidanoc15_harness_java_demo_1788123732322-pr-trigger-input-set
+  identifier: Build_aidanoc15_harness_java_demo_1788123732322prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_aidanoc15_harness_java_demo_1788123732322
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>

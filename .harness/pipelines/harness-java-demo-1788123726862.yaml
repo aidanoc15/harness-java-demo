@@ -1,0 +1,50 @@
+pipeline:
+  identifier: Build_aidanoc15_harness_java_demo_1788123732322
+  name: Build harness-java-demo
+  orgIdentifier: default
+  projectIdentifier: default_project
+  stages:
+    - stage:
+        name: build
+        identifier: build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: true
+          buildIntelligence:
+            enabled: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: build application
+                  identifier: GoInstallBuildTest
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: maven:3.9-eclipse-temurin-21
+                    shell: Bash
+                    command: mvn clean package
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: aidanoconnell
+                    repo: aidanoconnell/harness-java-demo
+                    tags:
+                      - <+pipeline.sequenceId>
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github_OAuth_1788122945839
+        repoName: aidanoc15/harness-java-demo
+        build: <+input>
