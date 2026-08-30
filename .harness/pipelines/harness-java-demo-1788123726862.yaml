@@ -29,6 +29,8 @@ pipeline:
                   name: GoInstallBuildTest
                   identifier: GoInstallBuildTest
                   spec:
+                    connectorRef: account.harnessImage
+                    image: maven:3.9-eclipse-temurin-21
                     shell: Bash
                     command: |-
                       mvn clean package
