@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harness-java-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: harness-java-demo
+  template:
+    metadata:
+      labels:
+        app: harness-java-demo
+    spec:
+      containers:
+        - name: harness-java-demo
+          image: aidanoconnell/harness-java-demo:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
