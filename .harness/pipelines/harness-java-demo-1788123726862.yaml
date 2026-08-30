@@ -26,16 +26,22 @@ pipeline:
             steps:
               - step:
                   type: Run
-                  name: GoInstallBuildTest
+                  name: build application
                   identifier: GoInstallBuildTest
                   spec:
                     connectorRef: account.harnessImage
                     image: maven:3.9-eclipse-temurin-21
                     shell: Bash
-                    command: |-
-                      mvn clean package
-                      docker build -t aidanoconnell/harness-java-demo:1.0 .
-                      docker push aidanoconnell/harness-java-demo:1.0
+                    command: mvn clean package
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: aidanoconnell
+                    repo: aidanoconnell/harness-java-demo
+                    tags:
+                      - "1.0"
   properties:
     ci:
       codebase:
