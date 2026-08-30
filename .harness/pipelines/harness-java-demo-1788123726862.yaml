@@ -41,7 +41,7 @@ pipeline:
                     connectorRef: aidanoconnell
                     repo: aidanoconnell/harness-java-demo
                     tags:
-                      - "1.0"
+                      - <+pipeline.sequenceId>
   properties:
     ci:
       codebase:
