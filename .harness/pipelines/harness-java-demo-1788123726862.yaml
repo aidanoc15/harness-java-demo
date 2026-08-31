@@ -43,7 +43,7 @@ pipeline:
                     image: maven:3.9-eclipse-temurin-21
                     shell: Bash
                     command: |-
-                      mvn clean test
+                      mvn test
                       echo "===== DEBUG ====="
                       echo "Working directory:"
                       pwd
