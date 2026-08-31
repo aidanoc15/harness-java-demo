@@ -33,7 +33,7 @@ pipeline:
                     connectorRef: account.harnessImage
                     image: maven:3.9-eclipse-temurin-21
                     shell: Bash
-                    command: mvn clean package
+                    command: mvn clean package -DskipTests
               - step:
                   type: Test
                   name: Run Unit Tests
