@@ -63,6 +63,12 @@ pipeline:
                           - target/surefire-reports/*.xml
                     intelligenceMode: false
               - step:
+                  name: Semgrep_1
+                  identifier: Semgrep_1
+                  template:
+                    templateRef: Corporate_Security_Scan
+                    versionLabel: "1"
+              - step:
                   type: BuildAndPushDockerRegistry
                   name: BuildAndPushDockerRegistry_1
                   identifier: BuildAndPushDockerRegistry_1
