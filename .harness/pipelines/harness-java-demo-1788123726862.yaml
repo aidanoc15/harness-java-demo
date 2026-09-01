@@ -69,14 +69,11 @@ pipeline:
                     templateRef: Corporate_Security_Scan
                     versionLabel: "1"
               - step:
-                  type: BuildAndPushDockerRegistry
-                  name: BuildAndPushDockerRegistry_1
-                  identifier: BuildAndPushDockerRegistry_1
-                  spec:
-                    connectorRef: aidanoconnell
-                    repo: aidanoconnell/harness-java-demo
-                    tags:
-                      - <+pipeline.sequenceId>
+                  name: build image
+                  identifier: build_image
+                  template:
+                    templateRef: Build_Docker_Image_with_Pipeline_Sequence_ID_as_Tag
+                    versionLabel: "1"
     - stage:
         name: deploy
         identifier: deploy
